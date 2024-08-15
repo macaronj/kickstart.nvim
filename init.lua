@@ -255,7 +255,25 @@ require('lazy').setup({
       },
     },
   },
+  {
+    'nvim-neorg/neorg',
+    lazy = false, -- Disable lazy loading as some `lazy.nvim` distributions set `lazy = true` by default
+    version = '*', -- Pin Neorg to the latest stable release
+    config = true,
 
+    config = function() -- This is the function that runs, AFTER loading
+  require("neorg").setup({
+    load = {
+        ["core.defaults"] = {},
+        ["core.concealer"] = {
+            config = { -- We added a `config` table!
+                icon_preset = "varied", -- And we set our option here.
+            },
+        },
+    }
+})
+end,
+    },
   -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
   --
   -- This is often very useful to both group configuration, as well as handle
